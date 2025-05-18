@@ -1,0 +1,19 @@
+function L = threepiontcluster(subtrees,labels)
+%produce final result according to result of centers
+%Input:
+%   subtrees: cluster result after disconnecting edges
+%   labels: labels produced by kmeans
+%Output:
+%   L: final labels of each data point
+
+L = zeros(numel(labels),1);
+
+for count = 1:numel(subtrees)
+    oneCluster = cell2mat(subtrees(count));
+    [Lia,~] = ismember(labels,oneCluster);
+    rows = find(Lia == 1);
+    L(rows) = count;
+end
+
+
+end
